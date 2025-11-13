@@ -1,0 +1,77 @@
+name: Extract gopskbomiall ZIP parts
+
+on:
+  push:
+    branches:
+      - main
+      - maine   # اگر برنچ اشتباهاً maine باشد
+  workflow_dispatch:   # اجرای دستی از تب Actions
+
+permissions:
+  contents: write   # برای commit & push
+
+jobs:
+  extract-and-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Show current branch (debug)
+        run: git branch --show-current
+
+      - name: List repository root (debug)
+        run: ls -lah
+
+      - name: Install unzip
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip
+
+      - name: Extract gopskbomiall-part1.zip
+        run: |
+          if [ -f "gopskbomiall-part1.zip" ]; then
+            echo "Found gopskbomiall-part1.zip"
+            unzip -o gopskbomiall-part1.zip -d .
+          else
+            echo "ERROR: gopskbomiall-part1.zip not found in repo root"
+            exit 1
+          fi
+
+      - name: Extract gopskbomiall-part2.zip
+        run: |
+          if [ -f "gopskbomiall-part2.zip" ]; then
+            echo "Found gopskbomiall-part2.zip"
+            unzip -o gopskbomiall-part2.zip -d .
+          else
+            echo "ERROR: gopskbomiall-part2.zip not found in repo root"
+            exit 1
+          fi
+
+      - name: Show extracted files (debug)
+        run: ls -lah
+
+      - name: Commit and push extracted files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          echo "Git status before staging:"
+          git status
+
+          # همه تغییرات (جدید، حذف‌شده، ادیت‌شده)
+          git add -A
+
+          # اگر چیزی برای commit نیست، خارج شو
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Extract gopskbomiall ZIP parts to main"
+          git push origin HEAD
