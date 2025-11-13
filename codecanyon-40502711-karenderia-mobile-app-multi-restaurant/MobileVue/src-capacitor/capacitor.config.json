@@ -1,0 +1,29 @@
+{
+  "appId": "com.demo.karenderia",
+  "appName": "Karenderia",
+  "webDir": "www",
+  "server": {},
+  "plugins": {
+    "App": {
+      "urlScheme": "karenderia"
+    },
+    "PushNotifications": {
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
+    },
+    "GoogleAuth": {
+      "scopes": [
+        "profile",
+        "email"
+      ],
+      "serverClientId": "46158489047-vptkm75h1okppmo5k0btqor6n8hki0dp.apps.googleusercontent.com",
+      "forceCodeForRefreshToken": true
+    },
+    "SplashScreen": {
+      "androidScaleType": "CENTER_CROP"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "appId": "com.kitchen.app",
+  "appName": "kitchen app",
+  "webDir": "www",
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
+    }
+  }
+}

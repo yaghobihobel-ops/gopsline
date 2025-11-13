@@ -1,0 +1,8 @@
+{
+  "appId": "com.demo.merchantapp",
+  "appName": "karenderia merchant app",
+  "webDir": "www",
+  "android": {
+    "adjustMarginsForEdgeToEdge": "force"
+  }
+}

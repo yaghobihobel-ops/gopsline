@@ -1,0 +1,286 @@
+// app global css in SCSS form
+
+body {
+  color: #919293;
+}
+
+.border {
+  border: 1px solid red;
+}
+
+.card-form {
+  width: calc(45vh);
+}
+
+.card-form-big {
+  width: calc(55vh);
+}
+
+.card-form-height {
+  min-height: calc(80vh);
+}
+.card-form-height-50 {
+  min-height: calc(50vh);
+}
+
+.border-200 {
+  border-color: #c1c3c4;
+}
+.border-bottom-200 {
+  border-bottom: 1px solid #c1c3c4;
+}
+
+.radius-6 {
+  border-radius: 6px;
+}
+
+.radius-10 {
+  border-radius: 10px;
+}
+
+.q-field__label,
+.q-field__marginal {
+  color: #83888f;
+}
+
+.primevue_toats {
+  width: 20rem;
+  border-radius: 6px;
+  box-shadow: 0px 4px 8px 0px rgba(59, 130, 246, 0.04);
+}
+
+.primevue_toats .q-notification__message {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.primevue_toats .q-notification__caption {
+  color: #334155;
+  font-size: 0.875rem;
+}
+
+.text-myerror {
+  color: #dc2626;
+}
+.bg-myerror {
+  background: rgba(254, 242, 242, 0.95);
+  border: solid #fecaca;
+  border-width: 1px;
+  color: #dc2626;
+}
+.bg-myerror .q-notification__message {
+  color: #dc2626 !important;
+}
+
+.bg-mysuccess {
+  background: rgba(240, 253, 244, 0.95);
+  border: solid #bbf7d0;
+  border-width: 1px;
+  color: #16a34a;
+}
+.text-mysuccess {
+  color: #16a34a;
+}
+.bg-mysuccess .q-notification__message {
+  color: #16a34a !important;
+}
+
+.bg-custom-grey {
+  background-color: #f2f4f6;
+}
+.text-custom-grey {
+  color: #f2f4f6;
+}
+
+.bg-custom-grey1 {
+  background-color: #dee2e6;
+}
+
+.border-positive {
+  border-color: rgba(20, 184, 166, 0.12);
+}
+
+.no-border.q-field--outlined .q-field__control::before {
+  border: none !important;
+}
+
+.box-shadow {
+  box-shadow: 0px 10px 40px rgba(41, 50, 65, 0.06) !important;
+}
+
+.bg-custom-grey2 {
+  background-color: #69707a;
+}
+
+.text-custom-grey2 {
+  color: #69707a;
+}
+
+.text-custom-grey3 {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.bg-custom-grey3 {
+  background-color: #f2f3f4;
+}
+
+.bg-custom-teal1 {
+  background-color: #8bdcdb;
+}
+
+.text-custom-grey4 {
+  color: #919293;
+}
+
+.bg-green-15 {
+  background-color: #8ad975;
+}
+.text-green-15 {
+  background-color: #8ad975;
+}
+
+.bg-orange-15 {
+  background-color: #f98e2b;
+}
+.text-orange-15 {
+  background-color: #f98e2b;
+}
+
+.bg-blue-15 {
+  background-color: rgb(88, 174, 211);
+}
+.text-blue-15 {
+  color: rgb(88, 174, 211);
+}
+
+.padding-8 {
+  padding: 8px;
+}
+
+.custom-tabs .justify-center,
+.custom-tabs .flex-center {
+  justify-content: start;
+}
+
+.custom-tabs .q-tab__label {
+  font-weight: normal;
+}
+
+.line-normal {
+  line-height: 1;
+}
+
+// .q-separator--horizontal {
+//   height: 0.5px;
+// }
+
+.primevue_toats {
+  width: 20rem;
+  border-radius: 6px;
+  box-shadow: 0px 4px 8px 0px rgba(59, 130, 246, 0.04);
+}
+
+.primevue_toats .q-notification__message {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.primevue_toats .q-notification__caption {
+  color: #334155;
+  font-size: 0.875rem;
+}
+
+.bg-grey600 {
+  background: #626262;
+}
+.text-grey600 {
+  color: #626262;
+}
+
+.bg-grey300 {
+  background: #b1b1b1;
+}
+.text-grey300,
+.q-list--dark,
+.q-item--dark,
+.q-dark,
+.q-toggle--dark .q-toggle__label {
+  color: #b1b1b1;
+}
+
+.bg-grey500 {
+  background: #7e7e7e;
+}
+.text-grey500 {
+  color: #7e7e7e;
+}
+.bg-grey600 {
+  background: #626262;
+}
+.text-grey600 {
+  color: #626262;
+}
+
+.width-200 {
+  width: 200px;
+}
+
+// TILE CSS
+.cell {
+  max-width: 100%;
+  display: block;
+}
+
+figure {
+  margin: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  margin-bottom: 10px;
+  break-inside: avoid;
+}
+
+figure > .cell {
+  grid-row: 1 / -1;
+  grid-column: 1;
+}
+
+figure a {
+  color: black;
+  text-decoration: none;
+}
+
+figcaption {
+  grid-row: 2;
+  grid-column: 1;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 0.2em 0.5em;
+  justify-self: start;
+}
+
+.container {
+  column-count: 4;
+  column-gap: 10px;
+}
+
+body.screen--xs {
+  .container {
+    column-count: 1 !important;
+  }
+}
+body.screen--sm {
+  .container {
+    column-count: 2 !important;
+  }
+}
+// END TILE CSS
+
+.canvas-container {
+  width: 100%;
+}
+
+.receiptCanvas {
+  width: 100%;
+  height: auto;
+}
+
+.q-field--outlined.q-field--readonly .q-field__control::before {
+  border-style: solid;
+}

@@ -1,0 +1,504 @@
+// app global css in SCSS form
+@import "https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css";
+
+@font-face {
+  font-family: "Nunito";
+  src: url("src/css/fonts/Nunito-ExtraLight.ttf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("src/css/fonts/Nunito-Light.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("src/css/fonts/Nunito-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("src/css/fonts/Nunito-Medium.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("src/css/fonts/Nunito-SemiBold.ttf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("src/css/fonts/Nunito-Bold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("src/css/fonts/Nunito-ExtraBold.ttf");
+  font-weight: 800;
+}
+
+.mu-font {
+  font-family: "Nunito";
+}
+
+body {
+  font-family: "Nunito";
+  color: #2a2d37;
+  background: #fff;
+}
+
+.border {
+  border: 1px solid red;
+}
+
+.bg-mydark {
+  background: #121212;
+}
+.text-mydark {
+  color: #121212;
+}
+
+.bg-mygreen {
+  background: #79c71e;
+}
+.text-mygreen {
+  color: #79c71e;
+}
+
+.bg-mylightgreen {
+  background: #4bdd62;
+}
+.text-mylightgreen {
+  color: #4bdd62;
+}
+
+.bg-myyellow {
+  background: #faae03;
+}
+.text-myyellow {
+  color: #faae03;
+}
+
+.bg-myyellow1 {
+  background: #fecd02;
+}
+.text-myyellow1 {
+  color: #fecd02;
+}
+
+.bg-myred {
+  background: #de3c37;
+}
+.text-myred {
+  color: #de3c37;
+}
+
+.bg-mycream {
+  background: #fbefdf;
+}
+.text-mycream {
+  color: #fbefdf;
+}
+
+.bg-myblue {
+  background: #007bf8;
+}
+.text-myblue {
+  color: #007bf8;
+}
+
+.bg-mylightblue {
+  background: #5ac7fc;
+}
+.text-mylightblue {
+  color: #5ac7fc;
+}
+
+.bg-mygrey {
+  background: #f2f2f2;
+}
+.text-mygrey {
+  color: #f2f2f2;
+}
+
+.bg-grey500 {
+  background: #7e7e7e;
+}
+.text-grey500 {
+  color: #7e7e7e;
+}
+.bg-grey600 {
+  background: #626262;
+}
+.text-grey600 {
+  color: #626262;
+}
+.bg-bluegrey500 {
+  background: #d9e2ec;
+}
+.text-bluegrey500 {
+  color: #d9e2ec;
+}
+
+.bg-grey300 {
+  background: #b1b1b1;
+}
+.text-grey300 {
+  color: #b1b1b1;
+}
+.font10 {
+  font-size: 10px;
+}
+
+.font11,
+.q-tab__label {
+  font-size: 11px;
+}
+.font12,
+.menutab .q-tab__label {
+  font-size: 12px;
+}
+
+.font13 {
+  font-size: 13px !important;
+}
+
+.font14 {
+  font-size: 14px !important;
+}
+
+.font15 {
+  font-size: 15px !important;
+}
+
+.font16 {
+  font-size: 16px !important;
+}
+
+.font17 {
+  font-size: 17px !important;
+}
+
+.font18 {
+  font-size: 18px !important;
+}
+
+.font19 {
+  font-size: 19px !important;
+}
+
+.font20 {
+  font-size: 20px !important;
+}
+
+.line-normal-1 {
+  line-height: 1;
+}
+
+.height-normal,
+.line-normal {
+  line-height: normal;
+}
+
+.border-grey {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.border-green {
+  border: 1px solid #66bb6a;
+}
+
+.border-bottom {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.w-25 {
+  width: 25%;
+}
+.w-50 {
+  width: 50%;
+}
+.w-75 {
+  width: 75%;
+}
+.margin-auto {
+  margin: auto !important;
+}
+
+.q-toolbar__title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.text-h7 {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.radius8 {
+  border-radius: 8px !important;
+}
+
+.radius10 {
+  border-radius: 10px !important;
+}
+
+.radius28 {
+  border-radius: 28px !important;
+}
+
+.map.small {
+  height: 25vh;
+}
+
+.map.medium {
+  height: 35vh;
+}
+
+.q-timeline__subtitle {
+  text-transform: none !important;
+}
+
+.q-timeline__title {
+  font-size: 13px !important;
+  margin-bottom: 0 !important;
+  font-weight: 700 !important;
+}
+
+.q-timeline--comfortable--right .q-timeline__subtitle {
+  padding-right: 10px !important;
+}
+.q-timeline--comfortable--right .q-timeline__content {
+  padding-left: 0 !important;
+}
+
+.q-timeline--dense--right .q-timeline__entry {
+  padding-left: 30px !important;
+}
+
+.q-timeline {
+  margin: 0 !important;
+}
+
+.q-timeline__entry {
+  line-height: normal !important;
+}
+
+.q-timeline__content {
+  padding-bottom: 10px !important;
+}
+
+.q-timeline__entry:last-child .q-timeline__content {
+  padding-bottom: 0 !important;
+}
+
+.card-bordered {
+  border-top: 2px solid #fafafa;
+  border-bottom: 2px solid #fafafa;
+}
+.border-top {
+  border-top: 2px solid #fafafa;
+}
+.border-bottom {
+  border-bottom: 2px solid #fafafa;
+}
+
+.modified-qtabs .q-tab {
+  padding: 0px !important;
+}
+
+.orderstab .q-tab {
+  background: #fff;
+  color: #2a2d37;
+}
+
+.orderstab .q-tab .q-tab__label {
+  font-weight: bold;
+}
+
+.cameraPreview {
+  height: 300px;
+  overflow: hidden;
+  --background: transparent;
+}
+
+.modified-footer {
+  border-radius: 10px;
+  bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: none !important;
+}
+
+.routertab_small {
+  width: 50px;
+}
+
+.modified-stepper .q-stepper__tab {
+  padding: 10px 15px;
+}
+
+.modified-stepper .q-stepper__title {
+  font-size: 12px;
+}
+
+// .custom-btn {
+//   width: 130px;
+//   height: 40px;
+//   color: #fff;
+//   border-radius: 5px;
+//   padding: 10px 25px;
+//   font-family: "Lato", sans-serif;
+//   font-weight: 500;
+//   background: transparent;
+//   cursor: pointer;
+//   transition: all 0.3s ease;
+//   position: relative;
+//   display: inline-block;
+//   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+//     7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+//   outline: none;
+// }
+// .btn-11 {
+//   border: none;
+//   background: rgb(251, 33, 117);
+//   background: linear-gradient(
+//     0deg,
+//     rgba(251, 33, 117, 1) 0%,
+//     rgba(234, 76, 137, 1) 100%
+//   );
+//   color: #fff;
+//   overflow: hidden;
+// }
+// .btn-11:hover {
+//   text-decoration: none;
+//   color: #fff;
+// }
+.btn-11:before {
+  position: absolute;
+  content: "";
+  display: inline-block;
+  top: -180px;
+  left: 0;
+  width: 30px;
+  height: 100%;
+  background-color: #fff;
+  animation: shiny-btn1 3s ease-in-out infinite;
+}
+// .btn-11:hover {
+//   opacity: 0.7;
+// }
+// .btn-11:active {
+//   box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.3),
+//     -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+//     inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
+//     inset 4px 4px 6px 0 rgba(0, 0, 0, 0.2);
+// }
+
+.myq-field .q-field__control {
+  color: transparent !important;
+}
+.myq-field .q-field__control::before {
+  border: none !important;
+}
+
+@keyframes shiny-btn1 {
+  0% {
+    -webkit-transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  80% {
+    -webkit-transform: scale(0) rotate(45deg);
+    opacity: 0.5;
+  }
+  81% {
+    -webkit-transform: scale(4) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(50) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #7ac142;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+.checkmark {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  margin: 2% auto;
+  box-shadow: inset 0px 0px 0px #7ac142;
+  animation: fill 0.4s ease-in-out 0.4s forwards,
+    scale 0.3s ease-in-out 0.9s both;
+}
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scale {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #7ac142;
+  }
+}
+
+.left-menu .q-item__section--avatar {
+  min-width: 25px !important;
+}
+
+.myq-field .q-field__control {
+  color: transparent !important;
+}
+
+.marker_icon_merchant,
+.marker_icon_destination,
+.marker_icon_rider {
+  background-size: cover;
+  background-color: #f44336;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.marker_icon_merchant {
+  background-image: url("restaurant.svg");
+}
+.marker_icon_destination {
+  background-image: url("home.svg");
+}
+.marker_icon_rider {
+  background-image: url("bicycle.svg");
+}

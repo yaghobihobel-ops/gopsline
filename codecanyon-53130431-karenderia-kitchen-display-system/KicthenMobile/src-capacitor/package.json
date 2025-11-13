@@ -1,0 +1,22 @@
+{
+  "name": "com.kitchen.app",
+  "version": "0.0.1",
+  "description": "karenderia kitchen app",
+  "author": "bastikikang@gmail.com",
+  "private": true,
+  "dependencies": {
+    "@bondulich/native-audio": "^6.0.3",
+    "@capacitor-community/bluetooth-le": "^6.0.0",
+    "@capacitor-community/fcm": "^6.0.0",
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/app": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/network": "^6.0.0",
+    "@capacitor/push-notifications": "^6.0.0",
+    "@capacitor/splash-screen": "^6.0.0",
+    "@capacitor/toast": "^6.0.1",
+    "cordova-plugin-btprinter": "github:CesarBalzer/Cordova-Plugin-BTPrinter",
+    "thermal-printer-encoder": "^2.0.0"
+  }
+}

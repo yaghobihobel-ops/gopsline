@@ -1,0 +1,8 @@
+{
+  "appId": "com.bastisapp.driver2",
+  "appName": "Driver app",
+  "webDir": "www",
+  "android": {
+    "adjustMarginsForEdgeToEdge": "force"
+  }
+}
