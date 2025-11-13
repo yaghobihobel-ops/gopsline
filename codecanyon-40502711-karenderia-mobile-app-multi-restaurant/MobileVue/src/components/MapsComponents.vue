@@ -154,6 +154,9 @@ export default {
     loadMap() {
       try {
         switch (this.provider) {
+          case "neshan":
+            this.renderMap();
+            break;
           case "google.maps":
             loadScript(
               "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=" +
@@ -200,6 +203,32 @@ export default {
     renderMap() {
       try {
         switch (this.provider) {
+          case "neshan":
+            this.cmaps = new L.Map(this.$refs.cmaps, {
+              key: this.keys,
+              maptype: "dreamy",
+              poi: true,
+              traffic: false,
+              center: [this.center.lat, this.center.lng],
+              zoom: this.zoom,
+            });
+            Object.entries(this.markers).forEach(([key, items]) => {
+              this.addMarker(
+                {
+                  position: {
+                    lat: parseFloat(items.lat),
+                    lng: parseFloat(items.lng),
+                  },
+                  map: this.cmaps,
+                  draggable: items.draggable,
+                  icon: items.icon,
+                  title: items.title,
+                },
+                items.id,
+                items.draggable
+              );
+            });
+            break;
           case "google.maps":
             bounds = new window.google.maps.LatLngBounds();
             if (typeof this.cmaps !== "undefined" && this.cmaps !== null) {
@@ -327,6 +356,19 @@ export default {
     addMarker(properties, index, draggable) {
       try {
         switch (this.provider) {
+          case "neshan":
+            cmapsMarker[index] = L.marker([properties.position.lat, properties.position.lng]).addTo(this.cmaps);
+            if (properties.title) {
+              cmapsMarker[index].bindPopup(properties.title);
+            }
+            if (draggable) {
+              cmapsMarker[index].dragging.enable();
+              cmapsMarker[index].on("dragend", (event) => {
+                const latLng = event.target.getLatLng();
+                this.$emit("afterSelectmap", latLng.lat, latLng.lng);
+              });
+            }
+            break;
           case "google.maps":
             console.log("properties", properties);
             cmapsMarker[index] = new window.google.maps.Marker(properties);

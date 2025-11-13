@@ -695,6 +695,13 @@
     :title="$t('Stripe')"
     @after-payment="afterPayment"
   />
+
+  <ZarinpalComponents
+    ref="zarinpal"
+    payment_code="zarinpal"
+    :order_uuid="CartStore.getOrderUUID"
+    @after-successfulpayment="afterSuccessfulpayment"
+  />
 </template>
 
 <script>
@@ -737,6 +744,12 @@ export default {
     // PAYMENT METHOD
     StripeComponents: defineAsyncComponent(() =>
       import("components/StripeComponents.vue")
+    ),
+    RazorpayComponents: defineAsyncComponent(() =>
+      import("components/RazorpayComponents.vue")
+    ),
+    ZarinpalComponents: defineAsyncComponent(() =>
+      import("components/ZarinpalComponents.vue")
     ),
   },
   data() {

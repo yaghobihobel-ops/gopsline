@@ -754,7 +754,7 @@ CREATE TABLE `st_currency` (
 --
 
 INSERT INTO `st_currency` (`id`, `currency_code`, `currency_symbol`, `description`, `as_default`, `is_hidden`, `currency_position`, `exchange_rate`, `exchange_rate_fee`, `number_decimal`, `decimal_separator`, `thousand_separator`, `date_created`, `date_modified`, `ip_address`) VALUES
-(1, 'USD', '$', 'United States Dollar', 1, 0, 'right', 1.0000, 0.0000, 2, '', '', '2021-01-20 08:00:54', '2022-01-26 22:41:48', '127.0.0.1'),
+(1, 'USD', '$', 'United States Dollar', 0, 0, 'right', 1.0000, 0.0000, 2, '', '', '2021-01-20 08:00:54', '2022-01-26 22:41:48', '127.0.0.1'),
 (2, 'JPY', '¥', 'Japan Yen', 0, 0, 'left', 104.5940, 0.0000, 2, '.', ',', '2021-01-20 08:02:20', '2021-05-18 23:33:26', '127.0.0.1'),
 (13, 'PHP', '₱', 'Philippine Peso', 0, 0, 'left', 48.0425, 0.0000, 2, '.', ',', '2021-01-20 22:51:46', '2021-05-18 23:33:26', '127.0.0.1'),
 (16, 'VND', '₫', 'Vietnamese Dong', 0, 0, 'left_space', 23028.3281, 0.0000, 2, '.', ',', '2021-01-21 07:38:41', '2021-05-18 23:33:26', '127.0.0.1'),
@@ -765,7 +765,8 @@ INSERT INTO `st_currency` (`id`, `currency_code`, `currency_symbol`, `descriptio
 (40, 'EUR', '€', 'Euro', 0, 0, 'left', 0.8252, 0.0000, 2, '.', ',', '2021-02-05 23:20:31', '2021-05-18 23:33:26', '127.0.0.1'),
 (41, 'BRL', 'R$', 'Brazilian Real', 0, 0, 'left', 5.3866, 0.0000, 2, '.', ',', '2021-02-05 23:21:54', '2021-05-18 23:33:26', '127.0.0.1'),
 (42, 'INR', '₹', 'Indian Rupee', 0, 0, 'left', 72.8289, 0.0000, 2, '.', ',', '2021-02-09 09:52:18', '2021-05-18 23:33:26', '127.0.0.1'),
-(43, 'ZWL', '', 'Zimbabwean Dollar', 0, 0, 'left', 322.0000, 0.0000, 2, '.', '', '2021-05-18 23:33:19', '2022-01-26 15:44:44', '127.0.0.1');
+(43, 'ZWL', '', 'Zimbabwean Dollar', 0, 0, 'left', 322.0000, 0.0000, 2, '.', '', '2021-05-18 23:33:19', '2022-01-26 15:44:44', '127.0.0.1'),
+(44, 'IRT', 'تومان', 'Toman', 1, 0, 'left', 1.0000, 0.0000, 0, '', ',', '2024-01-01 00:00:00', '2024-01-01 00:00:00', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -1011,6 +1012,7 @@ CREATE TABLE `st_item` (
   `item_description` text,
   `item_short_description` varchar(255) NOT NULL DEFAULT '',
   `status` varchar(50) NOT NULL DEFAULT '',
+  `stock` int(11) NOT NULL DEFAULT '-1',
   `photo` varchar(255) NOT NULL DEFAULT '',
   `path` varchar(255) NOT NULL DEFAULT '',
   `sequence` int(14) NOT NULL DEFAULT '0',
@@ -1201,7 +1203,8 @@ CREATE TABLE `st_language` (
 INSERT INTO `st_language` (`id`, `code`, `title`, `description`, `flag`, `rtl`, `sequence`, `status`, `date_created`, `date_modified`, `ip_address`) VALUES
 (1, 'ar', 'Arabic', 'al-\'arabiyyah, العربية', 'AE', 1, 3, 'publish', '2021-05-08 14:46:23', '2022-01-27 08:05:31', '127.0.0.1'),
 (2, 'en', 'English', 'american english', 'US', 0, 1, 'publish', '2021-05-08 14:46:23', '2022-01-27 08:05:25', '127.0.0.1'),
-(4, 'ja', 'Japanese', 'nihongo', 'JP', 0, 2, 'publish', '2021-05-08 14:46:23', '2022-01-27 08:05:19', '127.0.0.1');
+(4, 'ja', 'Japanese', 'nihongo', 'JP', 0, 2, 'publish', '2021-05-08 14:46:23', '2022-01-27 08:05:19', '127.0.0.1'),
+(5, 'fa', 'Farsi', 'فارسی', 'IR', 1, 4, 'publish', '2024-01-01 00:00:00', '2024-01-01 00:00:00', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -2563,10 +2566,8 @@ INSERT INTO `st_option` (`id`, `merchant_id`, `option_name`, `option_value`, `la
 (102, 0, 'merchant_plan_near_expired_tpl', '28', '2022-01-27 07:45:47'),
 (103, 0, 'website_title', 'Karenderia', '2022-01-27 16:09:32'),
 (104, 0, 'home_search_unit_type', 'mi', '2022-01-27 16:09:57'),
-(105, 0, 'map_provider', 'google.maps', '2022-01-28 07:38:48'),
-(106, 0, 'google_geo_api_key', 'XXXX', '2022-01-28 07:38:48'),
-(107, 0, 'google_maps_api_key', 'XXXX', '2022-01-28 07:38:48'),
-(108, 0, 'mapbox_access_token', 'XXXX', '2022-01-28 07:38:48'),
+(105, 0, 'map_provider', 'neshan', '2024-01-01 00:00:00'),
+(106, 0, 'neshan_api_key', 'YOUR_NESHAN_API_KEY', '2024-01-01 00:00:00'),
 (109, 0, 'signup_enabled_verification', '0', '2022-01-28 07:49:14'),
 (110, 0, 'signup_verification_type', NULL, '2022-01-28 07:49:14'),
 (111, 0, 'blocked_email_add', '', '2022-01-28 07:49:14'),
@@ -4570,6 +4571,7 @@ CREATE TABLE `st_zones` (
   `merchant_id` bigint(20) DEFAULT '0',
   `zone_name` varchar(255) NOT NULL DEFAULT '',
   `description` varchar(255) NOT NULL DEFAULT '',
+  `zone_data` text,
   `date_created` timestamp NULL DEFAULT NULL,
   `date_modified` timestamp NULL DEFAULT NULL,
   `ip_address` varchar(50) NOT NULL DEFAULT ''
