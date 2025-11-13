@@ -57,10 +57,10 @@ class AR_item extends CActiveRecord
 		  array('item_description,item_name_translation,price,
 		  item_description_translation,category_selected,photo,item_token,item_price,item_unit,track_stock,
 		  supplier_id,item_short_description,sku,item_featured,available,color_hex,item_short_description_translation,is_bulk,
-		  preparation_time,extra_preparation_time,unavailable_until
+		  preparation_time,extra_preparation_time,unavailable_until,stock
 		  ','safe'),
-		  
-		  array('item_price', 'numerical', 'integerOnly' => false,		  
+
+		  array('item_price,stock', 'numerical', 'integerOnly' => false,
 		  'message'=>t(Helper_field_numeric)),
 		  
 		  array('image', 'file', 'types'=> Helper_imageType, 'safe' => false,

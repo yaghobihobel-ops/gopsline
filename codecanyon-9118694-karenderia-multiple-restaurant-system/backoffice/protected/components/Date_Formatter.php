@@ -17,6 +17,10 @@ class Date_Formatter
 			}			
 		}
 
+		if (Yii::app()->language === 'fa') {
+            Yii::app()->setLocale('fa_IR@calendar=persian');
+        }
+
 		try {
 			return Yii::app()->dateFormatter->format("dd MMM yyyy", date("c"));
 		} catch (Exception $e) {

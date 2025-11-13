@@ -70,21 +70,34 @@ $form = $this->beginWidget(
 <?php if($model->isNewRecord):?>
 <div class="d-flex">
 
-<div class="form-label-group w-50 mr-3">    
+<div class="form-label-group w-50 mr-3">
    <?php echo $form->textField($model,'item_price',array(
      'class'=>"form-control form-control-text",
-     'placeholder'=>$form->label($model,'item_price')     
-   )); ?>   
-   <?php    
+     'placeholder'=>$form->label($model,'item_price')
+   )); ?>
+   <?php
     echo $form->labelEx($model,'item_price'); ?>
    <?php echo $form->error($model,'item_price'); ?>
 </div>
 
-<div class="form-label-group w-50">    
+<div class="form-label-group w-50 mr-3">
+   <?php echo $form->textField($model,'stock',array(
+     'class'=>"form-control form-control-text",
+     'placeholder'=>$form->label($model,'stock')
+   )); ?>
+   <?php
+    echo $form->labelEx($model,'stock'); ?>
+   <?php echo $form->error($model,'stock'); ?>
+   <small class="form-text text-muted">
+     <?php echo t("Enter -1 for unlimited stock.")?>
+   </small>
+</div>
+
+<div class="form-label-group w-50">
    <?php echo $form->dropDownList($model,'item_unit', (array) $units,array(
      'class'=>"form-control custom-select form-control-select",
      'placeholder'=>$form->label($model,'item_unit'),
-   )); ?>         
+   )); ?>
    <?php echo $form->error($model,'item_unit'); ?>
 </div>
 

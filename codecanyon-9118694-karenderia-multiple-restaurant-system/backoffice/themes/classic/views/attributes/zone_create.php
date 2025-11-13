@@ -55,6 +55,14 @@ $form = $this->beginWidget(
    <?php echo $form->error($model,'description'); ?>
 </div>
 
+<div class="form-label-group mt-2">
+   <?php echo $form->textArea($model,'zone_data',array(
+     'class'=>"form-control form-control-text",
+     'placeholder'=>t("Zone Data")
+   )); ?>
+   <?php echo $form->error($model,'zone_data'); ?>
+</div>
+
   </div> <!--body-->
 </div> <!--card-->
 
