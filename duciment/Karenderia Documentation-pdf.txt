@@ -1,0 +1,288 @@
+Documentation
+Developer : Bastisapp
+Author name : bastikikang
+Email : bastikikang@gmail.com
+Author Link : https://codecanyon.net/user/bastikikang/portfolio
+Software Framework : Yii, Vue 3, JS, Mysql and PHP
+Date of release :
+Table of contents
+A. Requirements
+B. How to activate license
+C. Where can I find the purchase code
+D. How to install script
+E. Best practice when going live
+F. Changing Back office URL
+G. How to download the latest version
+H. How to upgrade to the latest version
+I. Quick guide full setup of your website
+J. Video tutorials
+K. Change logs
+L. Source and Credits
+M. Finally
+Requirements
+Server requirements
+- App can be installed in subdomain or main domain or folder
+- If you want to install on localhost use XAMPP
+- SSL is required for payment and social login and google api
+- Server minimum requirements
+• PHP version 7.2 + (karenderia is build and stable in 7.2.16)
+• Mysql 5.6+
+• Mod_rewrite Apache
+• JSON php extension
+• MBstring php extension
+• PDO PHP extension
+• Ziparchive extension
+• Fileinfo Extension
+• GD Library (>=2.0) OR Imagick PHP extension (>=6.5.7
+In most server, these extension are enabled by default, but you should check with your hosting provider.
+How to activate your license
+Steps are
+• Open this link in your browser http://bastisapp.com/activation/
+• In the respective fields, put your Name, E-mail, CodeCanyon Username, Purchase Key and your
+domain
+• Click activate
+• You can change the activation later from this same form. Activating a Regular license again with
+another domain name will remove the activation of the previous domain
+• If your doing a test in your localhost enter a domain localhost.com
+Where can I find the purchase code
+• Login into your envato market account
+• Hover the mouse over your username at the top of the screen.
+• Click 'Downloads' from the drop-down menu.
+• Click 'License certificate & purchase code' (available as PDF or text file).
+If you still cannot find it envato has a video and image preview where to get it
+Go to this link https://help.market.envato.com/hc/en-us/articles/202822600-Where-Is-MyPurchase-CodeHow to install script
+To install the script follow the steps below.
+• Create a new database from your server MySQL database
+• Create a DB user to the database and link that database to the DB user.
+• Extract the downloaded .zip file from codecanyon on your PC. You’ll find a zip file named
+install.zip after extracting
+• Upload the Install.zip file to your server public_html or subdomain directory you intend to
+• run the script.
+• Check the following folder permission make sure the permission is set to 755 or 777 in the
+following path /upload , /protected/runtime , backoffice/protected/runtime
+• Set your database credentials open the file k-config.php set the value for DB_NAME ,
+DB_USER , DB_PASSWORD and DB_HOST.
+• Then, navigate your site URL example http://yourserver.com/backoffice/install in your browser
+and it will automatically take you to the installation wizard.
+• Click on the Start Installation Process
+• You will get the Checking File Permission page. If everything is ok then click on Go to the next
+step.
+• Now you need to import the SQL file
+• Now fill up the information of the shop and click Continue.
+• Click on Go to Home/ Login to the admin panel.
+Important: if you installing to a sub folder you need to update the .htaccess file with sub folder that you
+created both in main folder and backoffice folder
+Best practice when going live
+By default debug is ON to see the errors in your website this is good idea when your debugging your
+application but when going live we don’t want others to see errors and server details.
+• Open the file index.php and remove the line defined('YII_DEBUG') or define('YII_DEBUG',true);
+• Also we need to remove this in backoffice panel open the file backoffice/index.php and remove
+defined('YII_DEBUG') or define('YII_DEBUG',true);
+• Deleting the installer controller file in backoffice/controller/InstallerController.php
+• Change the CRON_KEY value in k-config.php
+By default there is cron key set this is a unique key in order to protect any cron jobs in your
+server so no one can execute the cron outside your server.
+CRON_KEY value should not not have spaces or special character create your random keys in
+https://passwordsgenerator.net/sha1-hash-generator/
+Changing Back office URL
+By default back office url is http://yourserver.com/backoffice/admin
+If you want to change this url to something like http://yourserver.com/myoffice/admin
+Please follow the steps below.
+• First rename the folder backoffice to myoffice
+Take note the folder should not have spaces example /my office this will not work
+It should be like /my-office or myoffice
+• open the file k-config.php change the value of BACKOFFICE_FOLDER
+example : define( 'BACKOFFICE_FOLDER', myoffice );
+• open the file myoffice/.htaccess change the folder name backoffice to myoffice
+example :
+RewriteBase /myoffice
+RewriteRule . /myoffice/index.php [L]
+• now you should be able to access your backend with the new URL
+http://yourserver.com/myoffice/admin
+How to download the latest version
+• Login to your Codecanyon account.
+• Hover over your username from the top right corner and click ‘Downloads’ from the drop-down
+menu
+• The downloads section displays a list of all the items purchased using your account Click the
+‘Download’ button next to the item and select ‘Main File(s)’ which contains all
+• The downloads section displays a list of all the items purchased using your account Click the
+‘Download’ button next to the item and select ‘Main File(s)’ which contains all files, or ‘Licence
+Certificate and Purchase Code’ for the item licence information only.
+How to upgrade to the latest version
+For now if your using the old kmrs there is no way to update this, the database has changes in terms of
+table structure , stay tune I will release a free addon for migration.
+I advise you to install this new karenderia to separate sub domain or new folder in your server to get
+familiars with the new version.
+Important: since this new update version 2 it has new codes most of your addon will not work anymore
+So if your already live and using mobile app I advise you to not update until those said addon is also
+updated.
+Update New karenderia Version 2
+• Extract the downloaded file from codecanyon.
+• There you will get a zipped folder named ‘updates.zip’. Upload that to the root directory on
+your server in which your previous version is running. Unzip that updates.zip file by selecting
+“Extract here”.
+• Now visit the update URL example http://yourserver.com/backoffice/update
+You should see the update page, to update simply click ‘Update Now’
+• Finish
+Quick guide full setup of your website
+In this section I will guide you to the quick minimal setup information that needed to run your website.
+Login to your backoffice
+• Fill your website details
+o Go to site configuration -> Site information
+and fill Title and business address and click save
+• Set your google API keys
+o Site configuration -> Map api keys
+Choose google maps as provider and enter your Geocoding API Key and Google Maps
+JavaScript API.
+You can go here https://developers.google.com/maps/documentation/places/webservice/get-api-key on how to get your google api key
+You can create or start your google projects here
+https://console.developers.google.com
+The following API should be enabled in your google projects
+1. Distance Matrix API
+2. Geocoding API
+3. Maps Javascript API
+4. Places API
+5. Maps Static API
+Things to note when creating google api:
+1. you cannot restrict the api key for Geocoding API Key as this key does not show
+anwhere in your website.
+2. For Google Maps JavaScript API you can restrict this to your domain or server I.p address
+3. Make sure you enabled your google billing account.
+4. In the new version of karenderia the call to google api is lessen compare to old version.
+Only the api will be called if necessary
+• Setting timezone
+o Site configuration -> Timezone
+This section is very important as ordering system time is very crucial
+On timezone dropdown select your country timezone
+o Date format – select your desire date format
+o Time Format – select your desire time format
+o Time interval – set the time interval for the customer to select on front end
+This will appear on front end where in the customer can select the delivery time
+o Click save
+Things to notes: in Yii framework you can hard code the timezone of your server by opening the
+file protected/config/main.php by changing the value of this line 'timezone'=>"Asia/Manila",
+You ca select from the PHP timezone list https://www.php.net/manual/en/timezones.php
+• Site configuration -> Ordering
+Enabled the following
+o Enabled ordering
+o Order cancellation
+o Click save
+• Site configuration -> Merchant registration
+In this section you can enabled the merchant can signup to your site using either membership or
+commission
+• Merchant registration – enabled the registration
+• Membership program – choose from the list commission and membership
+• Set Specific Country – you can restrict the country that can signup to your website
+Example if you want to only accept from your country Australi just choose Australia in
+drop down
+• Site configuration -> notifications
+o Enabled Notification
+enabled this to receive notification from new merchant signup to new order
+o Email address
+Enter your email address that will receive the notification
+o Mobile number
+Enter your mobile number that will receive the notification
+• Membership plans or Subscriptions
+In this section you will define the plan that merchant can subscribe to your website
+o First you need to add your plan and pricing once you add your plan
+Make sure you set the plans payment ID this can be found in your payment gateway
+portal
+A video will tutorial can be found for this in video tutorial sections.
+• Payment Gateway
+in order to receive order from customer you need to add or enabled payment gateway.
+Navigate to admin panel -> Payment gateway and from here you can see the list of available
+Payment gateway for karenderia
+o Choose one of the payment gateway example stripe click edit on the pencil icon ,
+Once edit you will see the form that ask for Payment API credentials just set your stripe
+api like Secret key Publishable key and webhook signing secret key
+o Enabled payment gateway to merchant .
+In order to enabled a payment gateway to merchant navigate to Merchant -> list and
+choose the merchant you need to edit and go to Payment settings -> enabled your
+desire payment gateway and click save.
+Things to note: karenderia has 2 different type of merchants
+Commission and membership
+▪ Commission
+This type of merchant will sale a item in your site and all payment will go to your
+account like stripe paypal etc, in short all payments will be collected by website
+owner.
+▪ Membership
+Merchant will pay a plan subscription like monthly yearly etc
+And all payments will go straight to merchant account.
+A video will tutorial can be found for this in video tutorial sections on how to
+configure payment gateway.
+• Receiving notification in real time
+In order to receive notification in real time like for new order new merchant signup etc.
+We need to enabled the real time application by navigating to admin panel -> Third party APP ->
+real time applications
+o Select realtime provide
+Choose pusher as provider and create your account by going to https://pusher.com/ .
+After you successful create your account you need to create a channel and navigate to
+APP keys to get your api credentials.
+o Copy all the credentials and paste in your settings and click saved.
+A video will tutorial can be found for this in video tutorial sections.
+• Set your default Currency
+o Navigate to admin panel -> attributes -> Currency
+o Choose your currency on the list if your currency is not available you can simply add
+them by clicking Add new
+• Finish
+Video tutorials
+- https://www.youtube.com/channel/UCMSzf36wnBxCwC4sriVmFFQ/videos
+Change logs
+• 1.0.2 (16 May 22)
+o fixed send otp when changing numbers and email
+o fixed search results when using different language
+o fixed sales summary report not counting complete status
+o fixed issue with transaction type if trans type is disabled in admin panel
+o fixed website logo to appear on themes
+o fixed merchant header to show on front end
+o fixed date/time format
+o fixed voucher and offer discount
+o fixed item list to include prices and discount
+o fixed menu top header layout
+o fixed html character showing in popular items
+o new – Upload addons manager
+o new – Settings for single website
+• 1.0.1 (22 Feb 22)
+o new translation modules
+o new full mobile device support backend and front end
+o update User interface
+o fixed partial refund
+o fixed set payout to paid
+o fixed tax set default
+o fixed issue with tax if not set
+o fixed phone number limit
+o fixed phone defailt flag
+o fixed forgot password admin,merchant and customer
+o fixed get merchant delivery directions
+o fixed razor pay
+• 1.0 (31 Jan 22)
+o Initial release
+Source and Credits
+I've used the following images, icons or other files as listed.
+• Yii framework
+• Intervention Image
+• Vue 3
+• Boostrap 4
+• Boostrap select
+• Sticky sidebar js
+• Magnific popup
+• Jquery sticky
+• Vue maska
+• Axios
+• jquery.touchSwipe
+• Vue Bootbox
+• Headroom
+• vue-advanced-cropper
+• notyf
+• lozad
+• howler
+• v-money3
+• nprogress
+• csshake
+• material-design-iconic-font
+• google font
+Finally
+Once again, thank you so much for purchasing this application. As I said at the beginning, I'd be glad to
+help you if you have any questions relating to this theme. No guarantees, but I'll do my best to assist. If
+you have a more general question relating to the themes on codecanyon, you might consider visiting the
+forums and asking your question in the "Item Discussion" section.
