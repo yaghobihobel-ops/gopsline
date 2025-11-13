@@ -1,0 +1,289 @@
+Documentation
+Developer : Bastisapp
+Author name : bastikikang
+Email : bastikikang@gmail.com
+Author Link : https://codecanyon.net/user/bastikikang/portfolio
+Software Framework : Yii, Vuejs 3, Pinia vuejs, Capacitor , Mysql and PHP
+Date of release : July 02, 2024
+Table of contents
+A. Requirements
+B. How to activate license
+C. Where can I find the purchase code
+D. How to install addons
+E. How to build PWA
+F. How to build Android
+G. Configuring your android app
+H. Configuring PWA
+I. How to download the latest version
+J. How to upgrade to the latest version
+K. Quick guide full setup of your single website
+L. PWA app Customization
+M. Android Customization
+N. Troubleshooting
+O. Video tutorials
+P. Change logs
+Q. Source and Credits
+R. Finally
+Requirements
+Server requirements
+- App can be installed in subdomain or main domain
+- If you want to install on localhost use XAMPP
+- SSL is required for PWA
+- Server minimum requirements
+• PHP version 7.2 + (Karenderia is build and stable in 7.4.27)
+• Mysql 5.6+
+• Mod_rewrite Apache
+• JSON php extension
+• MBstring php extension
+• PDO PHP extension
+• Ziparchive extension
+• Fileinfo Extension
+• GD Library (>=2.0) OR Imagick PHP extension (>=6.5.7
+In most servers, these extensions are enabled by default, but you should check with your hosting
+provider.
+How to activate your license
+Steps are
+• Open this link in your browser http://bastisapp.com/activation/
+• In the respective fields, put your Name, E-mail, CodeCanyon Username, Purchase Key and your
+domain
+• Click activate
+• You can change the activation later from this same form. Activating a Regular license again with
+another domain name will remove the activation of the previous domain
+• If you’re doing a test in your localhost enter a domain localhost.com
+• If you’re ready to go live you need to update your domain registration
+http://bastisapp.com/activation/index.php/index/updatedomain
+Where can I find the purchase code
+• Login into your Envato market account
+• Hover the mouse over your username at the top of the screen.
+• Click 'Downloads' from the drop-down menu.
+• Click 'License certificate & purchase code' (available as PDF or text file).
+If you still cannot find it Envato has a video and image preview where to get it
+Go to this link https://help.market.envato.com/hc/en-us/articles/202822600-Where-Is-My-
+Purchase-Code-
+How to install addons
+To install the addons follow these simple steps below.
+• First, extract the zip file Karenderia Kitchen App.zip
+• To install addons login to your admin panel and navigate to addon manager
+• Click on install/update addon
+• Locate the KitchenModules.zip that you extracted
+• Click install/update
+• Finish
+How to build PWA
+To build your PWA you need to install first Node.js and NPM first and Visual studio code.
+Quasar framework requires Node >=14 for Quasar CLI with Vite
+Guide for node.js and npm installation https://phoenixnap.com/kb/install-node-js-npm-on-windows
+Download visual studio here https://code.visualstudio.com/download
+Important: PWA works only with SSL so make sure your site has SSL installed example
+https://yourserver.com
+• First we need to install some extension for visual studio code, in your visual studio code
+Under File -> preferences -> extension -> search and install the following
+- Vetur by Pine Wu
+- ESLint
+• Extract the KicthenMobile.zip
+• In your visual studio code add the folder KicthenMobile to workspace
+• Open new terminal in your visual studio code on the project KicthenMobile
+• In your terminal run this command npm install -g @quasar/cli
+• Run this command npm install
+• Login to admin panel and locate Kitchen App -> settings on the sub menu API access click on
+Generate api keys.
+Copy the Mobile API URL, Payment API URL and Mobile API keys, now open up your vue files
+And open the file src/api/config.js
+And simply set the value for the following
+api_base_url = API URL
+api_token = Mobile API Keys
+It’s very important that don’t change the value of topic and channel
+• Finally we build the PWA app by running this command in your terminal quasar build -m pwa or
+if you want to run in debug mode for development run quasar dev -m pwa
+• Once the build is success you will find a folder in KicthenMobile/dist/pwa
+copy the files inside pwa to your website host and you can simply now access your pwa app
+example https://yourserver.com. Please use sub domain and don’t copy the pwa files to sub
+folder. Do not copy pwa folder, copy all the files inside KicthenMobile/dist/pwa folder
+example of sub domain https://pwa.yourserver.com
+• Finish
+Note : if command quasar command does not work you need to open up your command prompt and
+run it as administrator and execute this command
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+How to build Android
+To build android app you need to install android studio first always install the latest android studio.
+Follow this guide https://quasar.dev/quasar-cli-vite/developing-capacitor-apps/preparation
+Note: follow only the guide step 1 installation
+Before doing this make sure your already set your api_base_url and api_token
+In src/ src/api/config.js under build pwa section.
+This guide below only to show how to quick build the app in android, to fully complete build you need to
+change all the configuration to yours such as providing firebase project for push, google login , social
+login etc. follow the guide under configuring your android application.
+• In your Visual Studio code open a terminal with your project TableSideVue
+• In your terminal run this command npm install -g @quasar/cli
+• Now run npm install in main folder of TableSideVue and cd to src-capacitor folder and run npm
+install
+• To test the app in browser do the command quasar dev
+• To quick run the app in android we first run it with development mode
+By running this command quasar dev -m capacitor -T android
+This will open up your android studio if you already have configure your device emulator just
+click play button to run the app in your android emulator.
+Also you can run it with your actual mobile phone by connecting your device to your computer
+And make sure the developer options is enabled in your phone, you can find many video how to
+turn on developer options in your phone such as this
+https://www.youtube.com/watch?v=gn4bRTFicZw
+• Finally once your app is completed you can build the app by running this command
+quasar build -m capacitor -T android –d
+once build is done open up your android studio and open the project src-capacitor/android, or
+if you already run the dev command you probably already open the files, all of you have to do is
+sign the app, go to your android studio and locate Build -> generate signed bundle / apk
+and provide your keystore on the next page.
+• Finish
+Configuring your android app
+• Build your app
+https://youtu.be/9-_CkcVEVdU
+• Configure firebase project
+https://youtu.be/IvQGqTJFH4M
+• Create keystore
+https://youtu.be/_5SoV6dsMDo
+• Change push sounds notifications
+To change the push notifications sounds just replace the file in with same filename in
+src-capacitor\android\app\src\main\res\raw\notify.mp3
+• Change android package ID and package name
+https://youtu.be/2owVmp2EX_w
+Configuring PWA
+• Build your PWA app
+https://youtu.be/nkhVzG2pGnc
+• Configure facebook login
+https://youtu.be/U5tY9fqtdcs
+• Configure Google login
+https://youtu.be/mPvxceHyS2I
+How to download the latest version
+• Login to your Codecanyon account.
+• Hover over your username from the top right corner and click ‘Downloads’ from the drop-down
+menu
+• The downloads section displays a list of all the items purchased using your account Click the
+‘Download’ button next to the item and select ‘Main File(s)’ which contains all
+• The downloads section displays a list of all the items purchased using your account Click the
+‘Download’ button next to the item and select ‘Main File(s)’ which contains all files, or ‘Licence
+Certificate and Purchase Code’ for the item license information only.
+How to upgrade to the latest version
+To update to latest version process is still the same as installation
+You need to upload the KitchenModules.zip under admin panel -> addon manager
+And to use the pwa vue you need to use the new files and compile the web app again
+Using quasar build -m pwa command
+Quick guide full setup of your PWA and
+Mobile app
+In this section I will guide you to the quick minimal setup information that needed to run your pwa app
+and mobile app.
+Login to your merchant panel
+• Fill your website details
+o Go to site merchant -> information
+and fill merchant information tab and address
+• Set your google API keys
+o Merchant -> settings -> Map api keys
+Choose google maps as provider and enter your Geocoding API Key and Google Maps
+JavaScript API.
+You can go here https://developers.google.com/maps/documentation/places/web-
+service/get-api-key on how to get your google api key
+You can create or start your google projects here
+https://console.developers.google.com
+The following API should be enabled in your google projects
+1. Distance Matrix API
+2. Geocoding API
+3. Maps Javascript API
+4. Places API
+5. Maps Static API
+Things to note when creating google api:
+1. You cannot restrict the api key for Geocoding API Key as this key does not show
+anywhere in your website.
+2. For Google Maps JavaScript API you can restrict this to your domain or server I.p address
+3. Make sure you enabled your google billing account.
+4. In the new version of Karenderia the call to google api is lessen compared to old version.
+Only the api will be called if necessary
+• Merchant -> Search mode
+In this section you can set your default country
+• Merchant -> Settings -> Login & Signup
+In this section you set how your customer register to your website
+• Merchant -> -> Settings -> Phone settings
+Set your default phone country code
+• Merchant -> Settings -> Social settings
+In here you can allow your customer to easily login using social login like facebook and google
+• Merchant -> notifications settings
+Set the email address and phone number that will receive notifications if there is new order
+• Payment Gateway
+To receive an order from customer you need to add or enabled payment gateway.
+Navigate to admin panel -> Payment gateway and from here you can see the list of available
+Payment gateway for karenderia
+o Choose one of the payment gateway example stripe click edit on the pencil icon ,
+Once edit you will see the form that ask for Payment API credentials just set your stripe
+api like Secret key Publishable key and webhook signing secret key
+o Enabled payment gateway to merchant.
+In order to enabled a payment gateway to merchant navigate to Merchant -> list and
+choose the merchant you need to edit and go to Payment settings -> enabled your
+desire payment gateway and click save.
+Things to note: Karenderia has 2 different types of merchants
+Commission and membership
+▪ Commission
+This type of merchant will sale an item on your site and all payment will go to
+your account like stripe PayPal etc., in short, all payments will be collected by
+the website owner.
+▪ Membership
+Merchant will pay a plan subscription like monthly yearly etc
+And all payments will go straight to merchant account.
+A video will tutorial can be found for this in video tutorial sections on how to
+configure payment gateway.
+• Finish
+PWA app Customization
+• Changing PWA app title
+- To change the pwa application name locate the file src-pwa/manifest.json
+Change the name and short name
+• Change the pwa app default icon
+- To change the pwa app icon you have to options
+1. Manually change the app icon found in public/icons
+2. Auto generate icons using icon genie
+By executing the command
+icongenie generate -m pwa -i /path/to/source/icon.png [-b /path/to/background.png --
+splashscreen-color fff4ef ]
+more information how to use icon genie cli
+https://quasar.dev/quasar-cli-vite/developing-pwa/app-icons-pwa
+• Change the color of pwa and mobile app
+- To change the color simply change the color in src/css/ quasar.variables.scss
+And main css app.scss
+Android app Customization
+• Change app icon and splash screen
+- To change the android app icon you have to options
+1. Manually change the app icon found in src-capacitor\android\app\src\main\res
+2. Auto generate icons using icon genie
+By executing the command
+icongenie generate -m capacitor -i /path/to/source/icon.png --padding 10,10 [-b b
+/path/to/background.png --splashscreen-color fff4ef ]
+more information how to use icon genie cli
+https://quasar.dev/quasar-cli-vite/developing-capacitor-apps/app-icons-capacitor
+Troubleshooting
+Here are the common mistake when single web app does not work
+• some server does not return bearer token
+- Soulution is to edit the .htaccess and add RewriteCond %{HTTP:Authorization} ^(.*)
+- RewriteRule .* - [e=HTTP_AUTHORIZATION:%1] after RewriteEngine On
+example
+RewriteEngine On
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+• API blocking request
+- When generating api keys make sure you’re in your website domain url
+• Cannot execute quasar command
+- Make sure you installed NPM and quasar cli in your local computer, quasar requires node+12
+More information in https://quasar.dev/start/pick-quasar-flavour
+Video tutorials
+- https://www.youtube.com/channel/UCMSzf36wnBxCwC4sriVmFFQ/videos
+Change logs
+• 1.0 .0 (02 July 24)
+o Initial release
+Source and Credits
+I've used the following images, icons or other files as listed.
+• Yii framework
+• Quasar dev framework
+• Vuejs 3
+• Pinia vuejs
+• Axios
+• google font
+• freepik.com
+• Capacitor
+Finally
+Once again, thank you so much for purchasing this application. As I said at the beginning, I'd be glad to
+help you if you have any questions relating to this theme. No guarantees, but I'll do my best to assist. If
+you have a more general question relating to the themes on Codecanyon, you might consider visiting
+the forums and asking your question in the "Item Discussion" section.
