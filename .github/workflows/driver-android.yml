@@ -1,0 +1,63 @@
+name: Build Driver Android
+
+on:
+  push:
+    tags:
+      - "driver-*"
+
+jobs:
+  build-driver-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android platforms & build-tools
+        run: |
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Extract version from tag
+        id: vars
+        run: |
+          RAW="${GITHUB_REF_NAME}"       # driver-01
+          VER="${RAW#driver-}"           # 01
+          echo "APP_VERSION=$VER" >> $GITHUB_OUTPUT
+
+      - name: Install NPM deps (Driver)
+        working-directory: codecanyon-44025705-karenderia-driver-app/DriverVue
+        run: npm install
+
+      - name: Build Quasar (Capacitor Android)
+        working-directory: codecanyon-44025705-karenderia-driver-app/DriverVue
+        run: npx quasar build -m capacitor -T android
+
+      - name: Build Android APK
+        working-directory: codecanyon-44025705-karenderia-driver-app/DriverVue/src-capacitor/android
+        run: ./gradlew assembleRelease
+
+      - name: Collect APK
+        run: |
+          mkdir -p artifacts/driver
+          cp codecanyon-44025705-karenderia-driver-app/DriverVue/src-capacitor/android/app/build/outputs/apk/release/*.apk \
+             artifacts/driver/driver-android-v${{ steps.vars.outputs.APP_VERSION }}.apk
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: driver-android-v${{ steps.vars.outputs.APP_VERSION }}
+          path: artifacts/driver/
