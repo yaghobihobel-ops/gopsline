@@ -1,0 +1,63 @@
+name: Build Kitchen Android
+
+on:
+  push:
+    tags:
+      - "kitchen-*"
+
+jobs:
+  build-kitchen-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android platforms & build-tools
+        run: |
+          sdkmanager "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Extract version from tag
+        id: vars
+        run: |
+          RAW="${GITHUB_REF_NAME}"       # kitchen-01
+          VER="${RAW#kitchen-}"          # 01
+          echo "APP_VERSION=$VER" >> $GITHUB_OUTPUT
+
+      - name: Install NPM deps (Kitchen)
+        working-directory: codecanyon-53130431-karenderia-kitchen-display-system/KicthenMobile
+        run: npm install
+
+      - name: Build Quasar (Capacitor Android)
+        working-directory: codecanyon-53130431-karenderia-kitchen-display-system/KicthenMobile
+        run: npx quasar build -m capacitor -T android
+
+      - name: Build Android APK
+        working-directory: codecanyon-53130431-karenderia-kitchen-display-system/KicthenMobile/src-capacitor/android
+        run: ./gradlew assembleRelease
+
+      - name: Collect APK
+        run: |
+          mkdir -p artifacts/kitchen
+          cp codecanyon-53130431-karenderia-kitchen-display-system/KicthenMobile/src-capacitor/android/app/build/outputs/apk/release/*.apk \
+             artifacts/kitchen/kitchen-android-v${{ steps.vars.outputs.APP_VERSION }}.apk
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kitchen-android-v${{ steps.vars.outputs.APP_VERSION }}
+          path: artifacts/kitchen/
