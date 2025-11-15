@@ -1,81 +1,60 @@
-# نقشه راه فنی (Technical Roadmap)
+# PHP 8 Upgrade Roadmap
 
-این مستند، نقشه راه و تسک‌بندی فنی پروژه بومی‌سازی و بهبود پلتفرم Gops (Karenderia) برای بازار ایران را شرح می‌دهد.
+This document outlines the strategy and steps required to upgrade the application to PHP 8.
 
-## فاز ۱: تحلیل و مستندسازی (انجام شده)
+## 1. Environment Setup
 
-- **عنوان:** شناسایی معماری و ساختار پروژه
-- **توضیح:** کلون کردن ریپازیتوری، تحلیل ساختار پوشه‌ها و شناسایی تکنولوژی‌های اصلی (Yii Framework برای Backend و Quasar/Vue.js برای Frontend).
-- **اولویت:** High
-- **وابستگی‌ها:** -
-- **خروجی:** مستند `ANALYSIS.md` که معماری، جریان‌های کاربری و ریسک‌ها را تشریح می‌کند.
+1.  **Create a dedicated development branch:** All work should be done in a separate Git branch to avoid disrupting the main codebase.
+2.  **Set up a local development environment with PHP 8:** Use Docker or a similar tool to create an environment that mirrors the production server but with PHP 8.
 
-## فاز ۲: بومی‌سازی زبان و واحدها (انجام شده)
+## 2. Dependency Management
 
-- **عنوان:** فارسی‌سازی متون و فعال‌سازی RTL
-- **توضیح:** افزودن فایل ترجمه فارسی (`fa/index.js`) به اپلیکیشن Quasar و فعال‌سازی `direction: rtl` برای پشتیبانی از زبان فارسی.
-- **اولویت:** High
-- **وابستگی‌ها:** فاز ۱
-- **خروجی:** رابط کاربری با قابلیت نمایش متون فارسی و چیدمان راست‌چین.
+1.  **Create a root `composer.json` file:** The project currently lacks a centralized dependency management system. A root `composer.json` file should be created to manage all PHP dependencies.
+2.  **Add all identified dependencies to `composer.json`:** This includes `phpoffice/phpspreadsheet`, `intervention/image`, `firebase/php-jwt`, `dompdf/dompdf`, and `chillerlan/php-qrcode`.
+3.  **Install dependencies with Composer:** Run `composer install` to download and install all dependencies.
 
-- **عنوان:** تبدیل واحد پول به تومان (IRT)
-- **توضیح:** ویرایش فایل `karenderia.sql` برای افزودن «تومان» به عنوان واحد پول پیش‌فرض و حذف اعشار از نمایش قیمت‌ها.
-- **اولویت:** High
-- **وابستگی‌ها:** فاز ۱
-- **خروجی:** نمایش تمام قیمت‌ها در سیستم با واحد تومان.
+## 3. Code Refactoring
 
-- **عنوان:** پیاده‌سازی تاریخ شمسی
-- **توضیح:** شناسایی کلاس متمرکز `Date_Formatter.php` و تغییر `locale` به `fa_IR@calendar=persian` برای تبدیل خودکار تاریخ‌های میلادی به شمسی در سمت Backend.
-- **اولویت:** High
-- **وابستگی‌ها:** فاز ۱
-- **خروجی:** نمایش تاریخ‌ها (مانند تاریخ سفارش) به صورت شمسی در سراسر اپلیکیشن.
+1.  **Address `preg_replace` `/e` modifier:**
+    *   Locate all instances of `preg_replace` with the `/e` modifier.
+    *   Replace them with `preg_replace_callback`.
+2.  **Replace `ereg` functions:**
+    *   Identify all calls to `ereg` and `eregi`.
+    *   Replace them with `preg_match`.
+3.  **Replace `mcrypt` functions:**
+    *   Find all `mcrypt_*` function calls.
+    *   Replace them with the equivalent `openssl_*` functions. This may require careful analysis of the encryption logic.
+4.  **Address other deprecated functions:**
+    *   Replace `get_magic_quotes_gpc` with appropriate input filtering.
+    *   Replace `Each` with `foreach` loops.
+    *   Address the use of `$this` in non-class contexts.
+    *   Replace the `cpdf` extension with `pecl/pdflib`.
 
-## فاز ۳: اصلاح نقشه و مناطق سرویس‌دهی (انجام شده)
+## 4. Jalali (Shamsi) Calendar Implementation
 
-- **عنوان:** جایگزینی سرویس نقشه گوگل با نشان
-- **توضیح:** ایجاد یک لایه انتزاعی (Abstraction Layer) در Backend برای سرویس نقشه و پیاده‌سازی `NeshanMapProvider`. در Frontend نیز کامپوننت `NeshanMap.vue` جایگزین کامپوننت نقشه گوگل شد.
-- **اولویت:** High
-- **وابستگی‌ها:** فاز ۱
-- **خروجی:** عملکرد صحیح نقشه در ایران با استفاده از سرویس بومی «نشان».
+The current implementation of the Jalali calendar is incomplete. A comprehensive solution requires the following steps:
 
-- **عنوان:** افزودن قابلیت تعریف مناطق سرویس‌دهی مبتنی بر Polygon
-- **توضیح:** افزودن ستون `zone_data` از نوع `TEXT` به جدول `st_zones` در `karenderia.sql` و اصلاح کنترلر و View مربوطه در پنل ادمین برای مدیریت مناطق جغرافیایی به صورت چندضلعی.
-- **اولویت:** Medium
-- **وابستگی‌ها:** فاز ۱
-- **خروجی:** قابلیت تعریف و ویرایش مناطق سرویس‌دهی از طریق پنل مدیریت.
+1.  **Backend:**
+    *   **Install a dedicated library:** Use a library like `morilog/jalali` to handle date and time conversions.
+    *   **Create a helper class:** Develop a helper class that wraps the Jalali library and provides a consistent interface for converting dates and times between Gregorian and Jalali.
+    *   **Update the application:** Replace all instances of date and time formatting with calls to the new helper class.
 
-## فاز ۴: اصلاح پرداخت (انجام شده)
+2.  **Frontend:**
+    *   **Install a date/time library:** Use a library like `moment-jalaali` to handle date and time formatting in the Vue.js frontend.
+    *   **Create a global mixin:** Develop a global Vue mixin that provides methods for formatting dates and times in the Jalali calendar.
+    *   **Update components:** Replace all instances of date and time formatting with calls to the new mixin.
 
-- **عنوان:** پیاده‌سازی درگاه پرداخت زرین‌پال
-- **توضیح:** ایجاد کنترلر `ZarinpalController.php` در Backend برای مدیریت فرآیند پرداخت و بازگشت از درگاه. در Frontend نیز کامپوننت `ZarinpalComponents.vue` برای نمایش در صفحه پرداخت ایجاد شد.
-- **اولویت:** High
-- **وابستگی‌ها:** فاز ۱
-- **خروجی:** امکان پرداخت آنلاین از طریق درگاه زرین‌پال با پشتیبانی از حالت Sandbox.
+## 5. Testing
 
-## فاز ۵: توسعه/تکمیل ماژول‌ها (انجام شده)
+1.  **Set up a testing framework:** If one is not already in place, configure PHPUnit for unit and integration testing.
+2.  **Write tests for critical functionality:** Create tests for user authentication, order processing, payment integration, and other core features.
+3.  **Perform comprehensive testing:**
+    *   Run all existing tests (if any).
+    *   Run the newly created tests.
+    *   Manually test all user flows to identify any regressions.
 
-- **عنوان:** افزودن قابلیت «ظرفیت روزانه» برای غذاها
-- **توضیح:** افزودن ستون `stock` به جدول `st_item`، اصلاح مدل `AR_item.php` برای اعتبارسنجی و ویرایش View مربوطه برای نمایش فیلد «تعداد موجودی» در فرم مدیریت غذا.
-- **اولویت:** High
-- **وابستگی‌ها:** فاز ۱
-- **خروجی:** قابلیت تعیین تعداد قابل فروش برای هر آیتم غذا توسط مامان‌ها.
+## 5. Deployment
 
-- **عنوان:** ساده‌سازی پنل مامان‌ها (پیشنهادی)
-- **توضیح:** تحلیل پنل فعلی و ارائه پیشنهاد برای حذف منوهای غیرضروری و ساده‌سازی فرم‌ها جهت بهبود تجربه کاربری.
-- **اولویت:** Medium
-- **وابستگی‌ها:** فاز ۱
-- **خروجی:** مستند `ANALYSIS_MOMS_PANEL.md` (در دست تهیه).
-
-## فاز ۶: تست، دیباگ و آماده‌سازی (در حال انجام)
-
-- **عنوان:** تدوین سناریوهای تست
-- **توضیح:** تهیه لیستی از سناریوهای تست برای جریان‌های اصلی کاربر (مامان، مشتری، ادمین) و موارد حساس مانند پرداخت، تاریخ و نقشه.
-- **اولویت:** High
-- **وابستگی‌ها:** تمام فازهای قبلی.
-- **خروجی:** مستند `TEST_SCENARIOS.md`.
-
-- **عنوان:** تهیه چک‌لیست نهایی
-- **توضیح:** ایجاد یک چک‌لیست جامع برای بررسی تمام بخش‌های پروژه و اطمینان از عدم فراموشی موارد مهم.
-- **اولویت:** High
-- **وابستگی‌ها:** تمام فازهای قبلی.
-- **خروجی:** مستند `FINAL_CHECKLIST.md`.
+1.  **Deploy to a staging environment:** Before deploying to production, deploy the upgraded application to a staging server that mirrors the production environment.
+2.  **Perform final testing on staging:** Conduct a final round of testing on the staging server to ensure everything is working as expected.
+3.  **Deploy to production:** Once the staging deployment is verified, deploy the application to the production server.

@@ -1,28 +1,50 @@
 <?php
-class NeshanMapProvider implements MapProviderInterface
+class NeshanMapProvider
 {
-    private $apiKey;
-
-    public function __construct($apiKey)
+    public static function findPlace($query, $apiKey, $lat, $lng)
     {
-        $this->apiKey = $apiKey;
+        $api_url = "https://api.neshan.org/v1/search?term=" . urlencode($query) . "&lat=$lat&lng=$lng";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $api_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Api-Key: ' . $apiKey
+        ));
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($result, true);
     }
 
-    public function search($query)
+    public static function placeDetails($place_id, $apiKey)
     {
-        // Placeholder for Neshan search API call
-        return [];
+        // For Neshan, place_id is the location coordinates
+        $coords = explode(',', $place_id);
+        $api_url = "https://api.neshan.org/v1/reverse?lat=" . $coords[0] . "&lng=" . $coords[1];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $api_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Api-Key: ' . $apiKey
+        ));
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($result, true);
     }
 
-    public function geocode($address)
+    public static function reverseGeocoding($lat, $lng, $apiKey)
     {
-        // Placeholder for Neshan geocode API call
-        return null;
-    }
-
-    public function reverseGeocode($latitude, $longitude)
-    {
-        // Placeholder for Neshan reverse geocode API call
-        return null;
+        $api_url = "https://api.neshan.org/v1/reverse?lat=$lat&lng=$lng";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $api_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Api-Key: ' . $apiKey
+        ));
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($result, true);
     }
 }
