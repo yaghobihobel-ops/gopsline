@@ -422,7 +422,8 @@ class AttributesController extends CommonController
 		$model->multi_language = $multi_language;
 
 		if(isset($_POST['AR_status'])){
-			$model->attributes=$_POST['AR_status'];
+			$model->attributes=$_POST['AR_zones'];
+			$model->zone_data = $_POST['AR_zones']['zone_data'];
 			if($model->validate()){
 				if($model->save()){
 					if(!$update){

@@ -1,21 +1,9 @@
 <template>
-  <GoogleMap
-    ref="mapRef"
-    :api-key="api_key"
-    :center="center"
-    :zoom="default_zoom"
-    class="fit"
-    :disable-default-ui="true"
-    :styles="$q.dark.mode ? map_style_dark : map_style"
-  >
-    <template v-for="items in markers" :key="items">
-      <Marker :options="items" />
-    </template>
-  </GoogleMap>
+  <NeshanMap />
 </template>
 
 <script>
-import { GoogleMap, Marker } from "vue3-google-map";
+import NeshanMap from "./NeshanMap.vue";
 import { ref, watch } from "vue";
 import { useDataStore } from "stores/DataStore";
 

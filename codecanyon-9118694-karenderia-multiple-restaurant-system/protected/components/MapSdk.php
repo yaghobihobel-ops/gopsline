@@ -26,6 +26,11 @@ class MapSdk
 		'reverse_geocoding'=>"https://geocode-maps.yandex.ru/1.x",
 		'distance'=>"https://api.routing.yandex.net/v2/distancematrix"
 	  ),
+	  'neshan'=>array(
+		'place'=>"https://api.neshan.org/v1/search",
+		'place_detail'=>"https://api.neshan.org/v1/reverse",
+		'reverse_geocoding'=>"https://api.neshan.org/v1/reverse",
+	  ),
 	);
 	
 	public static function setKeys($keys=array())
@@ -33,7 +38,6 @@ class MapSdk
 		if(array_key_exists(self::$map_provider,(array)$keys)){
 			self::$api_key=$keys[self::$map_provider];
 		} 
-		//} else  throw new Exception('Invalid google api keys');
 	}
 	
 	public static function setMapParameters($parameters=array())
@@ -138,6 +142,17 @@ class MapSdk
 					throw new Exception ( "There are too many requests in a short time." ); 
 				}
 				break;
+
+			case "neshan":
+				$lat = 0; $lng = 0;
+				if(isset(self::$map_parameters['lat'])){
+					$lat = self::$map_parameters['lat'];
+				}
+				if(isset(self::$map_parameters['lng'])){
+					$lng = self::$map_parameters['lng'];
+				}
+				$data = NeshanMapProvider::findPlace($query, self::$api_key, $lat, $lng);
+				break;
 			    
 			default:
 				throw new Exception ( 'undefined map provider' ); 
@@ -224,7 +239,11 @@ class MapSdk
 					throw new Exception ( "There are too many requests in a short time." ); 
 				}
 				break;
-			    
+
+			case "neshan":
+				$data = NeshanMapProvider::placeDetails($place_id, self::$api_key);
+				break;
+
 			default:
 				throw new Exception ( 'undefined map provider' );
 				break;
@@ -793,6 +812,9 @@ class MapSdk
 				} else if ( self::$http_code==429 )	{
 					throw new Exception ( "There are too many requests in a short time." ); 
 				}								
+				break;
+			case "neshan":
+				$data = NeshanMapProvider::reverseGeocoding($lat, $lng, self::$api_key);
 				break;
 		}
 				

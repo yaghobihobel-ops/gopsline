@@ -96,7 +96,8 @@ class OrderController extends CommonController
 	
 	
 	public function actionview()
-	{				
+	{
+		Yii::import('application.components.JalaliDate');
 		
 		$this->pageTitle = t("Order Details");		
 		CommonUtility::setMenuActive('.admin_orders','.order_list');		
@@ -147,7 +148,8 @@ class OrderController extends CommonController
 		
 		try {
 
-		    $order = COrders::get($order_uuid);												
+		    $order = COrders::get($order_uuid);
+			$order->date_created = JalaliDate::toJalali($order->date_created);
 			$printer_list = [];
 			try {
 				$printer_list = FPinterface::getPrinterAll([0,$order->merchant_id],[

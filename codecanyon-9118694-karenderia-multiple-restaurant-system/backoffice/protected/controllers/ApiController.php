@@ -6598,6 +6598,32 @@ HTML;
 			   	COrders::savedMeta($model->order_id,'rejetion_reason',$rejetion_reason);
 			}
 			if($model->save()){
+				$status_delivered = AOrderSettings::getStatus(array('status_delivered','status_completed'));
+				$status_cancelled = AOrderSettings::getStatus(array('status_cancel_order','status_rejection'));
+
+				if(in_array($status, (array)$status_delivered)){
+					$items = COrders::getItems();
+					foreach($items as $item){
+						$item_id = $item['item_id'];
+						$qty = $item['qty'];
+						Yii::app()->db->createCommand("UPDATE {{item}} SET stock = stock - :qty WHERE item_id = :item_id")
+						->bindValue(':qty', $qty)
+						->bindValue(':item_id', $item_id)
+						->execute();
+					}
+				} elseif (in_array($status, (array)$status_cancelled)) {
+                    $items = COrders::getItems();
+                    if(is_array($items) && count($items)>0){
+                        foreach($items as $item){
+                            $item_id = $item['item_id'];
+                            $qty = $item['qty'];
+                            Yii::app()->db->createCommand("UPDATE {{item}} SET stock = stock + :qty WHERE item_id = :item_id")
+                            ->bindValue(':qty', $qty)
+                            ->bindValue(':item_id', $item_id)
+                            ->execute();
+                        }
+                    }
+                }
 			   $this->code = 1;
 			   $this->msg = t("Status Updated");						   
 			} else $this->msg = CommonUtility::parseError( $model->getErrors());
