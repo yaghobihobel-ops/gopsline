@@ -1,0 +1,63 @@
+name: Build Merchant Android
+
+on:
+  push:
+    tags:
+      - "merchant-*"
+
+jobs:
+  build-merchant-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android platforms & build-tools
+        run: |
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Extract version from tag
+        id: vars
+        run: |
+          RAW="${GITHUB_REF_NAME}"       # merchant-01
+          VER="${RAW#merchant-}"         # 01
+          echo "APP_VERSION=$VER" >> $GITHUB_OUTPUT
+
+      - name: Install NPM deps (Merchant)
+        working-directory: codecanyon-42215908-karenderia-merchant-app-restaurant/MerchantVue
+        run: npm install
+
+      - name: Build Quasar (Capacitor Android)
+        working-directory: codecanyon-42215908-karenderia-merchant-app-restaurant/MerchantVue
+        run: npx quasar build -m capacitor -T android
+
+      - name: Build Android APK
+        working-directory: codecanyon-42215908-karenderia-merchant-app-restaurant/MerchantVue/src-capacitor/android
+        run: ./gradlew assembleRelease
+
+      - name: Collect APK
+        run: |
+          mkdir -p artifacts/merchant
+          cp codecanyon-42215908-karenderia-merchant-app-restaurant/MerchantVue/src-capacitor/android/app/build/outputs/apk/release/*.apk \
+             artifacts/merchant/merchant-android-v${{ steps.vars.outputs.APP_VERSION }}.apk
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: merchant-android-v${{ steps.vars.outputs.APP_VERSION }}
+          path: artifacts/merchant/
